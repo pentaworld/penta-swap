@@ -31,13 +31,13 @@ const Header: React.VFC = () => {
 };
 
 const Account: React.VFC = () => {
-  const { accounts, connectWallet, chainId, switchChain } = useWeb3();
-  const { perm } = useCurrentChain();
+  const { accounts, chainId } = useWeb3();
+  const { param } = useCurrentChain();
   const name = accounts[0]
     ? `${accounts[0].slice(0, 5)}...${accounts[0].slice(-4)}`
     : null;
 
-  if (name && chainId !== perm.chainId) {
+  if (name && chainId !== param.chainId) {
     return <SwitchNetwork className="btn btn-error" />;
   }
 
@@ -81,7 +81,7 @@ const Nav: React.VFC = () => {
 };
 
 export const DefaultLayout: React.VFC<{ children: React.ReactNode }> = ({
-  children
+  children,
 }) => {
   return (
     <div

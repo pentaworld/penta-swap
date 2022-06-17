@@ -2,8 +2,6 @@ import "@/assets/styles/global.css";
 import { DefaultLayout } from "@/components/Layout/DefaultLayout";
 import React from "react";
 
-import { AppProvider } from "@/providers/app";
-
 function MyApp({
   Component,
   pageProps,
@@ -12,11 +10,9 @@ function MyApp({
   pageProps: any;
 }) {
   return (
-    <AppProvider>
-      <DefaultLayout>
-        <Component {...pageProps} />
-      </DefaultLayout>
-    </AppProvider>
+    <DefaultLayout>
+      <Component {...pageProps} />
+    </DefaultLayout>
   );
 }
 

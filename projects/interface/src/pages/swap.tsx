@@ -1,7 +1,5 @@
-import Swap from "@/views/Swap";
-
 const SwapPage: React.VFC = () => {
-  return <Swap />;
+  return <div></div>;
 };
 
 export default SwapPage;
