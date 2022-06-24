@@ -7,9 +7,9 @@ export const SwitchNetwork: React.VFC<{
   children?: React.ReactNode;
 }> = ({ className, children }) => {
   const { switchChain } = useWeb3();
-  const { perm } = useCurrentChain();
+  const { param } = useCurrentChain();
   return (
-    <button className={className} onClick={() => void switchChain(perm)}>
+    <button className={className} onClick={() => void switchChain(param)}>
       {children ? children : `Wrong Network`}
     </button>
   );
