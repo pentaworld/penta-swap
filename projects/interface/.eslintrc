@@ -47,5 +47,5 @@
     ],
     "tailwindcss/no-custom-classname": "off"
   },
-  "files": ["src/**/*.ts", "src/**/*/tsx"]
+  "overrides": [{ "files": ["src/**/*.ts", "src/**/*.tsx"] }]
 }
