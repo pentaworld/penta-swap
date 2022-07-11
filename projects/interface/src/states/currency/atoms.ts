@@ -5,7 +5,7 @@ import { Currency } from "@penta-swap/sdk";
 import { atomFamily } from "recoil";
 import { Currencies } from "./types";
 
-export const CurrencyLogoStates = atomFamily<
+export const currencyLogoStates = atomFamily<
   string | undefined,
   string | undefined
 >({
