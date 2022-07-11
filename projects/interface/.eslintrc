@@ -1,9 +1,9 @@
-module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
+{
+  "env": {
+    "browser": true,
+    "es2021": true
   },
-  extends: [
+  "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
@@ -11,30 +11,30 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "prettier",
-    "plugin:tailwindcss/recommended",
+    "plugin:tailwindcss/recommended"
   ],
-  parser: "@typescript-eslint/parser",
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: "./tsconfig.json",
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
   },
-  settings: {
-    react: {
-      version: "detect",
-    },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   },
-  plugins: [
+  "plugins": [
     "react",
     "react-hooks",
     "import",
     "@typescript-eslint",
-    "tailwindcss",
+    "tailwindcss"
   ],
-  rules: {
+  "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/prop-types": "off",
@@ -42,9 +42,10 @@ module.exports = {
     "no-restricted-imports": [
       "error",
       {
-        patterns: ["@/features/*/*"],
-      },
+        "patterns": ["@/features/*/*"]
+      }
     ],
-    "tailwindcss/no-custom-classname": "off",
+    "tailwindcss/no-custom-classname": "off"
   },
-};
+  "files": ["src/**/*.ts", "src/**/*/tsx"]
+}

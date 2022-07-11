@@ -13,6 +13,9 @@
     "source.fixAll.eslint": true
   },
   "eslint.workingDirectories": [{ "mode": "auto" }],
+  "[solidity]": {
+    "editor.defaultFormatter": "NomicFoundation.hardhat-solidity"
+  },
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
