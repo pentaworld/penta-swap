@@ -12,7 +12,7 @@ export const CurrencyInput: React.FC<{
 }> =
   // eslint-disable-next-line react/display-name
   memo(({ currency = null, label }) => {
-    const { isOpen, open, close } = useModal(`currencySelectModal/${label}`);
+    const { isOpen, open, close } = useModal(`select-${label}`);
     return (
       <>
         <CurrencySelectModal open={isOpen} onClose={close} />

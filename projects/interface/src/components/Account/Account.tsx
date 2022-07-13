@@ -5,7 +5,7 @@ import { AccountModal } from "../Modal";
 
 export const Account: React.FC = () => {
   const { isConnected, accounts } = useWeb3();
-  const { isOpen, close, open } = useModal("accountModal");
+  const { isOpen, close, open } = useModal("account");
   return (
     <>
       <AccountModal open={isOpen} onClose={close} />
