@@ -1,5 +1,5 @@
 import { NumberInput } from "@/components/Elements";
-import { useModal } from "@/hooks";
+import { useModal } from "@/states/interface";
 import { Currency, Token } from "@penta-swap/sdk";
 import { memo } from "react";
 import { CurrencySelectModal } from "../Modal";
@@ -8,11 +8,11 @@ import { CurrencySelectButton } from "./CurrencySelectButton";
 // eslint-disable-next-line react/display-name
 export const CurrencyInput: React.FC<{
   currency?: Currency | Token | null;
-  label?: string;
+  label: string;
 }> =
   // eslint-disable-next-line react/display-name
   memo(({ currency = null, label }) => {
-    const { isOpen, open, close } = useModal();
+    const { isOpen, open, close } = useModal(`currencySelectModal/${label}`);
     return (
       <>
         <CurrencySelectModal open={isOpen} onClose={close} />

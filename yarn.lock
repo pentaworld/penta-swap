@@ -1819,6 +1819,11 @@
     "@types/sinon-chai" "^3.2.3"
     "@types/web3" "1.0.19"
 
+"@recoiljs/refine@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@recoiljs/refine/-/refine-0.1.0.tgz#915a60801334b11bf4245231b734e31bab39bcda"
+  integrity sha512-5f5ohe6Fc24tW4esoEgCBl+E4qUe/C1nJUAhkt+2xQ3//OCkvpsQ/YrPY6B+DHjoKsrfO0RLekxSQcUlWz2UUA==
+
 "@rollup/plugin-babel@^5.1.0":
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-babel/-/plugin-babel-5.3.1.tgz#04bc0608f4aa4b2e4b1aebf284344d0f68fda283"
@@ -7715,6 +7720,14 @@ rechoir@^0.6.2:
   dependencies:
     resolve "^1.1.6"
 
+recoil-sync@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/recoil-sync/-/recoil-sync-0.1.0.tgz#4bdbadff3e205036151e766d27118d2baec82ecf"
+  integrity sha512-0D1cb1EJbWk1gDyZ3jA7nrRNpnLe9tw5lo8sKlheKXL17iOih5m96WPGLLy4j/Kl444xA2X8EERXw6Q6ml34PQ==
+  dependencies:
+    "@recoiljs/refine" "^0.1.0"
+    transit-js "^0.8.874"
+
 recoil@^0.7.4:
   version "0.7.4"
   resolved "https://registry.yarnpkg.com/recoil/-/recoil-0.7.4.tgz#d6508fa656d9c93e66fdf334e1f723a9e98801cf"
@@ -8882,6 +8895,11 @@ tr46@^1.0.1:
   integrity sha1-qLE/1r/SSJUZZ0zN5VujaTtwbQk=
   dependencies:
     punycode "^2.1.0"
+
+transit-js@^0.8.874:
+  version "0.8.874"
+  resolved "https://registry.yarnpkg.com/transit-js/-/transit-js-0.8.874.tgz#37b27d6632bd796567c359220297c862e3988bbb"
+  integrity sha512-IDJJGKRzUbJHmN0P15HBBa05nbKor3r2MmG6aSt0UxXIlJZZKcddTk67/U7WyAeW9Hv/VYI02IqLzolsC4sbPA==
 
 "true-case-path@^2.2.1":
   version "2.2.1"
