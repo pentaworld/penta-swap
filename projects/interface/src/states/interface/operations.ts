@@ -6,7 +6,7 @@ export const useModal = (key: string) => {
   const [openingKey, setKey] = useRecoilState(modalState);
   const isOpen = openingKey === key;
 
-  const close = useCallback(() => setKey(null), []);
+  const close = useCallback(() => setKey(""), []);
   const open = useCallback(() => setKey(key), [key]);
   const setIsOpen = useCallback(
     (state: boolean) => (state ? open() : close()),
