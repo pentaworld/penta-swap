@@ -7,15 +7,21 @@ import { CurrencySelectButton } from "./CurrencySelectButton";
 
 // eslint-disable-next-line react/display-name
 export const CurrencyInput: React.FC<{
-  currency?: Currency | Token | null;
+  currency: Currency | Token | null;
+  onSelect: (currency: Currency | Token | null) => void;
   label: string;
 }> =
   // eslint-disable-next-line react/display-name
-  memo(({ currency = null, label }) => {
+  memo(({ currency, onSelect, label }) => {
     const { isOpen, open, close } = useModal(`select-${label}`);
     return (
       <>
-        <CurrencySelectModal open={isOpen} onClose={close} />
+        <CurrencySelectModal
+          open={isOpen}
+          onClose={close}
+          currency={currency}
+          onSelect={onSelect}
+        />
         <div className="p-3 hover:ring-2 shadow-lg ring-neutral card bg-base-100">
           <div className="flex justify-between">
             <p className="text-lg font-bold">{label}</p>

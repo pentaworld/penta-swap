@@ -12,7 +12,7 @@ export const CurrencyRow: React.FC<{ currency: Currency | Token }> = ({
 }) => {
   return (
     <Combobox.Option as={Fragment} value={currency}>
-      {({ active, selected }) => (
+      {({ active }) => (
         <li
           className={clsx(
             "flex-row shrink-0 gap-2 items-center p-2 transition-all active:scale-95 cursor-pointer card",
@@ -27,9 +27,13 @@ export const CurrencyRow: React.FC<{ currency: Currency | Token }> = ({
   );
 };
 
-export const CurrencySelectModal: React.FC<ModalProps> = (props) => {
+export const CurrencySelectModal: React.FC<
+  ModalProps & {
+    currency: Currency | Token | null;
+    onSelect: (currency: Currency | Token | null) => void;
+  }
+> = ({ currency, onSelect, ...props }) => {
   const [query, setQuery] = useState("");
-  const [selected, setSelected] = useState<Currency | Token>(Currency.ETHER);
   const currencies = useSortedCurrencies(query);
   return (
     <Modal className="flex flex-col gap-2 p-4 sm:p-6" {...props}>
@@ -42,13 +46,16 @@ export const CurrencySelectModal: React.FC<ModalProps> = (props) => {
           <XIcon />
         </button>
       </div>
-      <Combobox value={selected} onChange={setSelected}>
+      <Combobox
+        value={currency}
+        onChange={(currency) => (onSelect(currency), props.onClose())}
+      >
         <Combobox.Input
           type="text"
           placeholder="Search Name"
           className="w-full text-xl font-bold input bg-base-200"
           displayValue={(currency: unknown) =>
-            (currency instanceof Currency && currency.symbol) || "error"
+            (currency instanceof Currency && currency.symbol) || ""
           }
           onChange={(e) => setQuery(e.target.value)}
         />
