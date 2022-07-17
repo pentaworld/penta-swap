@@ -1,1 +1,1 @@
-export * from "./selectCurrency";
+export * from "./input";
