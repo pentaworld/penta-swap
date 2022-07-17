@@ -16,7 +16,7 @@ export const CurrencyInput: React.FC<{
     return (
       <>
         <CurrencySelectModal open={isOpen} onClose={close} />
-        <div className="p-3 hover:ring-2 shadow-xl ring-neutral card bg-base-100">
+        <div className="p-3 hover:ring-2 shadow-lg ring-neutral card bg-base-100">
           <div className="flex justify-between">
             <p className="text-lg font-bold">{label}</p>
           </div>

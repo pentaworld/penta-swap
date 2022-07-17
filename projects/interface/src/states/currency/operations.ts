@@ -18,7 +18,10 @@ export const useCurrencyLogo = (currency: Currency | Token) => {
 export const useSortedCurrencies = (query: string) => {
   const currencies = useRecoilValue(currentChainCurrenciesSelector);
   const sortedCurrencies = useMemo(
-    () => currencies.filter((currency) => currency.name?.includes(query)),
+    () =>
+      currencies.filter((currency) =>
+        currency.name?.toLowerCase().includes(query.toLowerCase())
+      ),
     [currencies, query]
   );
   return sortedCurrencies;
