@@ -7,6 +7,8 @@ import type {
   BigNumberish,
   BytesLike,
   CallOverrides,
+  ContractTransaction,
+  Overrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -23,22 +25,92 @@ import type {
 
 export interface MulticallInterface extends utils.Interface {
   functions: {
-    "execute(uint256,uint256,address[],bytes[])": FunctionFragment;
+    "getCurrentBlockTimestamp()": FunctionFragment;
+    "aggregate((address,bytes)[])": FunctionFragment;
+    "getLastBlockHash()": FunctionFragment;
+    "getEthBalance(address)": FunctionFragment;
+    "getCurrentBlockDifficulty()": FunctionFragment;
+    "getCurrentBlockGasLimit()": FunctionFragment;
+    "getCurrentBlockCoinbase()": FunctionFragment;
+    "getBlockHash(uint256)": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "execute"): FunctionFragment;
+  getFunction(
+    nameOrSignatureOrTopic:
+      | "getCurrentBlockTimestamp"
+      | "aggregate"
+      | "getLastBlockHash"
+      | "getEthBalance"
+      | "getCurrentBlockDifficulty"
+      | "getCurrentBlockGasLimit"
+      | "getCurrentBlockCoinbase"
+      | "getBlockHash"
+  ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "execute",
+    functionFragment: "getCurrentBlockTimestamp",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "aggregate",
     values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>[],
-      PromiseOrValue<BytesLike>[]
+      { target: PromiseOrValue<string>; callData: PromiseOrValue<BytesLike> }[]
     ]
   ): string;
+  encodeFunctionData(
+    functionFragment: "getLastBlockHash",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getEthBalance",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getCurrentBlockDifficulty",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getCurrentBlockGasLimit",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getCurrentBlockCoinbase",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getBlockHash",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
 
-  decodeFunctionResult(functionFragment: "execute", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getCurrentBlockTimestamp",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "aggregate", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getLastBlockHash",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getEthBalance",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getCurrentBlockDifficulty",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getCurrentBlockGasLimit",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getCurrentBlockCoinbase",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getBlockHash",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -70,69 +142,171 @@ export interface Multicall extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    execute(
-      gasLimit: PromiseOrValue<BigNumberish>,
-      sizeLimit: PromiseOrValue<BigNumberish>,
-      addrs: PromiseOrValue<string>[],
-      datas: PromiseOrValue<BytesLike>[],
+    getCurrentBlockTimestamp(
       overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber[], string[]] & {
-        blockNumber: BigNumber;
-        statuses: BigNumber[];
-        results: string[];
-      }
-    >;
+    ): Promise<[BigNumber] & { timestamp: BigNumber }>;
+
+    aggregate(
+      calls: {
+        target: PromiseOrValue<string>;
+        callData: PromiseOrValue<BytesLike>;
+      }[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    getLastBlockHash(
+      overrides?: CallOverrides
+    ): Promise<[string] & { blockHash: string }>;
+
+    getEthBalance(
+      addr: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { balance: BigNumber }>;
+
+    getCurrentBlockDifficulty(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { difficulty: BigNumber }>;
+
+    getCurrentBlockGasLimit(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { gaslimit: BigNumber }>;
+
+    getCurrentBlockCoinbase(
+      overrides?: CallOverrides
+    ): Promise<[string] & { coinbase: string }>;
+
+    getBlockHash(
+      blockNumber: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string] & { blockHash: string }>;
   };
 
-  execute(
-    gasLimit: PromiseOrValue<BigNumberish>,
-    sizeLimit: PromiseOrValue<BigNumberish>,
-    addrs: PromiseOrValue<string>[],
-    datas: PromiseOrValue<BytesLike>[],
+  getCurrentBlockTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
+
+  aggregate(
+    calls: {
+      target: PromiseOrValue<string>;
+      callData: PromiseOrValue<BytesLike>;
+    }[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  getLastBlockHash(overrides?: CallOverrides): Promise<string>;
+
+  getEthBalance(
+    addr: PromiseOrValue<string>,
     overrides?: CallOverrides
-  ): Promise<
-    [BigNumber, BigNumber[], string[]] & {
-      blockNumber: BigNumber;
-      statuses: BigNumber[];
-      results: string[];
-    }
-  >;
+  ): Promise<BigNumber>;
+
+  getCurrentBlockDifficulty(overrides?: CallOverrides): Promise<BigNumber>;
+
+  getCurrentBlockGasLimit(overrides?: CallOverrides): Promise<BigNumber>;
+
+  getCurrentBlockCoinbase(overrides?: CallOverrides): Promise<string>;
+
+  getBlockHash(
+    blockNumber: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   callStatic: {
-    execute(
-      gasLimit: PromiseOrValue<BigNumberish>,
-      sizeLimit: PromiseOrValue<BigNumberish>,
-      addrs: PromiseOrValue<string>[],
-      datas: PromiseOrValue<BytesLike>[],
+    getCurrentBlockTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
+
+    aggregate(
+      calls: {
+        target: PromiseOrValue<string>;
+        callData: PromiseOrValue<BytesLike>;
+      }[],
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber[], string[]] & {
-        blockNumber: BigNumber;
-        statuses: BigNumber[];
-        results: string[];
-      }
+      [BigNumber, string[]] & { blockNumber: BigNumber; returnData: string[] }
     >;
+
+    getLastBlockHash(overrides?: CallOverrides): Promise<string>;
+
+    getEthBalance(
+      addr: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getCurrentBlockDifficulty(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getCurrentBlockGasLimit(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getCurrentBlockCoinbase(overrides?: CallOverrides): Promise<string>;
+
+    getBlockHash(
+      blockNumber: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
   };
 
   filters: {};
 
   estimateGas: {
-    execute(
-      gasLimit: PromiseOrValue<BigNumberish>,
-      sizeLimit: PromiseOrValue<BigNumberish>,
-      addrs: PromiseOrValue<string>[],
-      datas: PromiseOrValue<BytesLike>[],
+    getCurrentBlockTimestamp(overrides?: CallOverrides): Promise<BigNumber>;
+
+    aggregate(
+      calls: {
+        target: PromiseOrValue<string>;
+        callData: PromiseOrValue<BytesLike>;
+      }[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    getLastBlockHash(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getEthBalance(
+      addr: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getCurrentBlockDifficulty(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getCurrentBlockGasLimit(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getCurrentBlockCoinbase(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getBlockHash(
+      blockNumber: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    execute(
-      gasLimit: PromiseOrValue<BigNumberish>,
-      sizeLimit: PromiseOrValue<BigNumberish>,
-      addrs: PromiseOrValue<string>[],
-      datas: PromiseOrValue<BytesLike>[],
+    getCurrentBlockTimestamp(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    aggregate(
+      calls: {
+        target: PromiseOrValue<string>;
+        callData: PromiseOrValue<BytesLike>;
+      }[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    getLastBlockHash(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    getEthBalance(
+      addr: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getCurrentBlockDifficulty(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getCurrentBlockGasLimit(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getCurrentBlockCoinbase(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getBlockHash(
+      blockNumber: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

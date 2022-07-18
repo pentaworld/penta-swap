@@ -40,7 +40,6 @@ export const relationalPairsSelector = selector({
             )
             .filter(([tokenA, tokenB]) => !isEqCurrencies(tokenA, tokenB))
         : [];
-
     return allTokenCombinations;
   },
 });
