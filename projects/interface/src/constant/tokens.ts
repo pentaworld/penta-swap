@@ -68,3 +68,13 @@ export const chainTokens: { [chain in chains]: Token[] } = {
     ),
   ],
 };
+
+export const WETH: { [chain in chains]: Token } = {
+  astar: new Token(
+    592,
+    "0xAeaaf0e2c81Af264101B9129C00F4440cCF0F720",
+    18,
+    "WASTR",
+    "Wrapped Astar"
+  ),
+};
