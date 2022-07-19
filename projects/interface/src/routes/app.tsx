@@ -1,4 +1,3 @@
-import { Swap } from "@/features/Swap";
 import { lazyImport } from "@/utils/lazyImport";
 import { Navigate, Route, Routes } from "react-router-dom";
 
@@ -6,6 +5,8 @@ const { DefaultLayout } = lazyImport(
   () => import("@/components/Layout"),
   "DefaultLayout"
 );
+
+const { Swap } = lazyImport(() => import("@/features/Swap"), "Swap");
 
 export const AppRoutes = () => {
   return (
