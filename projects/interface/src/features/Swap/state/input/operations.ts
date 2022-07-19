@@ -1,5 +1,10 @@
 import { useRecoilState } from "recoil";
-import { inputCurrencySelector, outputCurrencySelector } from "./selector";
+import {
+  inputCurrencySelector,
+  inputValueSelector,
+  outputCurrencySelector,
+  outputValueSelector,
+} from "./selector";
 
 export const useSelectCurrencies = () => {
   const [inputCurrency, setInputCurrency] = useRecoilState(
@@ -15,4 +20,11 @@ export const useSelectCurrencies = () => {
     outputCurrency,
     setOutputCurrency,
   };
+};
+
+export const useCurrencyValues = () => {
+  const [inputValue, setInputValue] = useRecoilState(inputValueSelector);
+  const [outputValue, setOutputValue] = useRecoilState(outputValueSelector);
+
+  return { inputValue, setInputValue, outputValue, setOutputValue };
 };

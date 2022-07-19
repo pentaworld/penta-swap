@@ -1,10 +1,11 @@
-import { JSBI, Token, TokenAmount } from "@penta-swap/sdk";
+import { Token, TokenAmount } from "@penta-swap/sdk";
+import { ethers } from "ethers";
 
-export const getTokenAmount = (token: Token, amount: string) =>
-  new TokenAmount(
+export const getTokenAmount = (token: Token, amount: string) => {
+  return new TokenAmount(
     token,
-    JSBI.multiply(
-      JSBI.BigInt(amount),
-      JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(token.decimals))
-    )
+    ethers.utils
+      .parseUnits(amount.length > 0 ? amount : "0", token.decimals)
+      .toString()
   );
+};

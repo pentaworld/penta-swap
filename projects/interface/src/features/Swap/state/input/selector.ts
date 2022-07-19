@@ -1,8 +1,15 @@
 import { currentChainNameSelector } from "@/states/web3";
 import { isEqCurrencies } from "@/utils/isEqCurrencies";
 import { wrapCurrency } from "@/utils/wrapCurrency";
-import { DefaultValue, selector } from "recoil";
-import { inputCurrencyState, outputCurrencyState } from "./atoms";
+import { DefaultValue, noWait, selector } from "recoil";
+import { tradeExactInSelector, tradeExactOutSelector } from "../trade";
+import {
+  inputCurrencyState,
+  inputValueState,
+  nowTypingValueState,
+  outputCurrencyState,
+  outputValueState,
+} from "./atoms";
 
 export const inputCurrencySelector = selector({
   key: "inputCurrencySelector",
@@ -45,5 +52,41 @@ export const selectTokensSelector = selector({
     const inputToken = wrapCurrency(get(inputCurrencySelector), chainName);
     const outputToken = wrapCurrency(get(outputCurrencySelector), chainName);
     return { inputToken, outputToken };
+  },
+});
+
+export const inputValueSelector = selector({
+  key: "inputValueSelector",
+  get: ({ get }) => {
+    const nowTyping = get(nowTypingValueState);
+    if (nowTyping === "input") {
+      return get(inputValueState);
+    } else {
+      const tradeLoadable = get(noWait(tradeExactOutSelector));
+      const [trade] = tradeLoadable.valueMaybe() || [];
+      return trade ? trade.inputAmount.toSignificant(12) : "";
+    }
+  },
+  set: ({ set }, newValue) => {
+    set(inputValueState, newValue);
+    set(nowTypingValueState, "input");
+  },
+});
+
+export const outputValueSelector = selector({
+  key: "outputValueSelector",
+  get: ({ get }) => {
+    const nowTyping = get(nowTypingValueState);
+    if (nowTyping === "output") {
+      return get(outputValueState);
+    } else {
+      const tradeLoadable = get(noWait(tradeExactInSelector));
+      const [trade] = tradeLoadable.valueMaybe() || [];
+      return trade ? trade.outputAmount.toSignificant(12) : "";
+    }
+  },
+  set: ({ set }, newValue) => {
+    set(outputValueState, newValue);
+    set(nowTypingValueState, "output");
   },
 });

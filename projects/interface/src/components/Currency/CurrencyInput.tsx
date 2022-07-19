@@ -11,7 +11,7 @@ export const CurrencyInput: React.FC<{
   currency: Currency | Token | null;
   onSelect: (currency: Currency | Token | null) => void;
   value: string;
-  onChange: () => string;
+  onChange: (value: string) => void;
 }> =
   // eslint-disable-next-line react/display-name
   memo(({ currency, onSelect, value, onChange, label }) => {
@@ -34,7 +34,7 @@ export const CurrencyInput: React.FC<{
             <NumberInput
               className="pl-2 w-full text-3xl font-bold bg-transparent outline-none sm:pl-0 input"
               value={value}
-              onChange={(e) => onChange(e.target.value)}
+              onChange={onChange}
             />
           </div>
         </div>
