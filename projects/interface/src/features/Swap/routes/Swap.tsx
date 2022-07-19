@@ -2,7 +2,7 @@ import { CurrencyInput } from "@/components/Currency";
 import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { useSelectCurrencies } from "../state";
-import { tokenPairsQuery } from "../state/trade/selector";
+import { tokenPairsQuery } from "../state/pair/selector";
 
 export const Swap = () => {
   const { inputCurrency, setInputCurrency, outputCurrency, setOutputCurrency } =
