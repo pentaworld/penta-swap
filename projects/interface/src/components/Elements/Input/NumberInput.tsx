@@ -1,10 +1,10 @@
 import { memo } from "react";
 
-// eslint-disable-next-line react/display-name
 export const NumberInput: React.FC<{
   className?: string;
   value: string;
   onChange: (v: string) => void;
+  // eslint-disable-next-line react/display-name
 }> = memo(({ className, onChange, value }) => {
   const handleInput = (value: string) => {
     if (value === "" || RegExp(`^[0-9]*[.,]?[0-9]*$`).test(value)) {

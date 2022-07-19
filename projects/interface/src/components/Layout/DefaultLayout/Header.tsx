@@ -5,7 +5,7 @@ import { NavBar } from "./Navbar";
 export const Header = () => {
   return (
     <header className="fixed top-0 w-full">
-      <div className="gap-4 justify-between mx-auto max-w-screen-lg sm:px-4 navbar">
+      <div className="navbar mx-auto max-w-screen-lg justify-between gap-4 sm:px-4">
         <div className="flex-1">
           <IconLink to="/swap" className="py-0">
             <Logo />

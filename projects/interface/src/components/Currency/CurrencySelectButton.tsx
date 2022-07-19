@@ -12,21 +12,21 @@ export const CurrencySelectButton: React.FC<
     return (
       <button
         className={clsx(
-          "gap-1 justify-start p-0 text-xl font-bold sm:px-2 btn btn-ghost",
+          "btn btn-ghost justify-start gap-1 p-0 text-xl font-bold sm:px-2",
           className
         )}
         {...props}
       >
         <CurrencyLogo currency={currency} />
         {currency.symbol}
-        <ChevronDownIcon className="w-6 h-6" />
+        <ChevronDownIcon className="h-6 w-6" />
       </button>
     );
   } else {
     return (
       <button
         className={clsx(
-          "justify-start text-xl font-bold sm:px-2 btn btn-ghost",
+          "btn btn-ghost justify-start text-xl font-bold sm:px-2",
           className
         )}
         {...props}

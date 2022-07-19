@@ -15,7 +15,7 @@ export const CurrencyRow: React.FC<{ currency: Currency | Token }> = ({
       {({ active }) => (
         <li
           className={clsx(
-            "flex-row shrink-0 gap-2 items-center p-2 transition-all active:scale-95 cursor-pointer card",
+            "card shrink-0 cursor-pointer flex-row items-center gap-2 p-2 transition-all active:scale-95",
             active && "bg-base-300"
           )}
         >
@@ -37,7 +37,7 @@ export const CurrencySelectModal: React.FC<
   const currencies = useSortedCurrencies(query);
   return (
     <Modal className="flex flex-col gap-2 p-4 sm:p-6" {...props}>
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <h3 className="text-lg font-bold">Select Token</h3>
         <button
           className="btn btn-ghost btn-square btn-sm"
@@ -53,13 +53,13 @@ export const CurrencySelectModal: React.FC<
         <Combobox.Input
           type="text"
           placeholder="Search Name"
-          className="w-full text-xl font-bold input bg-base-200"
+          className="input w-full bg-base-200 text-xl font-bold"
           displayValue={(currency: unknown) =>
             (currency instanceof Currency && currency.symbol) || ""
           }
           onChange={(e) => setQuery(e.target.value)}
         />
-        <div className="overflow-y-auto h-[60vh]">
+        <div className="h-[60vh] overflow-y-auto">
           <Combobox.Options className="flex flex-col" static>
             {currencies.map((currency, i) => (
               <CurrencyRow currency={currency} key={i} />

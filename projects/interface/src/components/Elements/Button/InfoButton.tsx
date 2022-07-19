@@ -6,7 +6,7 @@ export const InfoButton: React.FC<JSX.IntrinsicElements["button"]> = ({
 }) => {
   return (
     <button
-      className={clsx("normal-case btn btn-sm btn-outline", className)}
+      className={clsx("btn-outline btn btn-sm normal-case", className)}
       {...props}
     />
   );

@@ -14,27 +14,27 @@ const AccountCard: React.FC<{ account: Account; close: () => void }> = ({
 }) => {
   const { disconnect } = useWeb3();
   return (
-    <div className="gap-2 p-2 pt-4 border-2 sm:pt-6 card">
+    <div className="card gap-2 border-2 p-2 pt-4 sm:pt-6">
       <p className="px-4 text-2xl font-bold">{account.ellipsisAddress}</p>
       <div className="flex gap-1">
-        <button className="gap-1 px-0 normal-case btn btn-sm btn-ghost">
-          <ClipboardCopyIcon className="w-5 h-5" />
+        <button className="btn btn-ghost btn-sm gap-1 px-0 normal-case">
+          <ClipboardCopyIcon className="h-5 w-5" />
           Copy Address
         </button>
-        <button className="gap-1 px-0 normal-case btn btn-sm btn-ghost">
-          <ExternalLinkIcon className="w-5 h-5" />
+        <button className="btn btn-ghost btn-sm gap-1 px-0 normal-case">
+          <ExternalLinkIcon className="h-5 w-5" />
           View on Explorer
         </button>
       </div>
       <div className="flex gap-1">
         <button
-          className="flex-1 btn btn-sm btn-primary btn-outline"
+          className="btn-outline btn btn-primary btn-sm flex-1"
           onClick={disconnect}
         >
           Change
         </button>
         <button
-          className="flex-1 btn btn-sm btn-secondary"
+          className="btn btn-secondary btn-sm flex-1"
           onClick={() => {
             close();
             disconnect();
@@ -69,7 +69,7 @@ const ConnectButton: React.FC<{
 
   return isValid ? (
     <button
-      className="justify-start px-0 text-2xl normal-case btn btn-block btn-lg btn-ghost"
+      className="btn btn-ghost btn-block btn-lg justify-start px-0 text-2xl normal-case"
       onClick={() => void connectWallet(connector)}
     >
       <img className="aspect-square h-full" src={symbol} />

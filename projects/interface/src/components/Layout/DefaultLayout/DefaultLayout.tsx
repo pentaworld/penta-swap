@@ -9,7 +9,7 @@ export const DefaultLayout = () => {
   return (
     <ThemeBox className="min-h-screen bg-base-200">
       <Header />
-      <div className="flex flex-col items-center py-24 h-full">
+      <div className="flex h-full flex-col items-center py-24">
         <Suspense fallback={<Spinner />}>
           <Outlet />
         </Suspense>

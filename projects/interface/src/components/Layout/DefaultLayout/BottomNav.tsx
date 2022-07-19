@@ -2,7 +2,7 @@ import { NavBar } from "./Navbar";
 
 export const BottomNav = () => {
   return (
-    <div className="flex fixed bottom-4 justify-center w-full sm:hidden">
+    <div className="fixed bottom-4 flex w-full justify-center sm:hidden">
       <NavBar />
     </div>
   );

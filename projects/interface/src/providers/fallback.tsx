@@ -3,7 +3,7 @@ import { ThemeBox } from "@/components/Layout";
 
 export const ErrorFallBack = () => {
   return (
-    <ThemeBox className="flex justify-center items-center min-h-screen">
+    <ThemeBox className="flex min-h-screen items-center justify-center">
       <h2>Some Error Happen!!!</h2>
     </ThemeBox>
   );
@@ -11,7 +11,7 @@ export const ErrorFallBack = () => {
 
 export const LoadingFallBack = () => {
   return (
-    <ThemeBox className="flex justify-center items-center min-h-screen">
+    <ThemeBox className="flex min-h-screen items-center justify-center">
       <Spinner size="lg" />
     </ThemeBox>
   );

@@ -31,7 +31,7 @@ export const Modal: React.FC<ModalProps> = memo(
           </Transition.Child>
           <ThemeBox
             transparent
-            className="flex fixed inset-0 justify-center items-end p-4 sm:items-center"
+            className="fixed inset-0 flex items-end justify-center p-4 sm:items-center"
           >
             <Transition.Child
               as={Fragment}
@@ -44,7 +44,7 @@ export const Modal: React.FC<ModalProps> = memo(
             >
               <Dialog.Panel
                 className={clsx(
-                  "overflow-auto w-full max-w-lg rounded-2xl shadow-xl bg-base-100",
+                  "w-full max-w-lg overflow-auto rounded-2xl bg-base-100 shadow-xl",
                   className
                 )}
               >
