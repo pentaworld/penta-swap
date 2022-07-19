@@ -1,7 +1,12 @@
 import { ChainParameter, chainParameters, chains } from "@/constant/chains";
 import { ethers } from "ethers";
 import { selector } from "recoil";
-import { addressesState, currentChainState, eip1193State } from "./atom";
+import {
+  addressesState,
+  connectingChainIdState,
+  currentChainState,
+  eip1193State,
+} from "./atom";
 import { Account } from "./types";
 
 export const providerSelector = selector<null | ethers.providers.Provider>({
@@ -38,5 +43,18 @@ export const accountsSelector = selector<Account[]>({
       address,
       ellipsisAddress: `${accounts[0].slice(0, 6)}...${accounts[0].slice(-4)}`,
     }));
+  },
+});
+
+export const fetchProviderSelector = selector({
+  key: "fetchProvider",
+  dangerouslyAllowMutability: true,
+  get({ get }) {
+    const eip1193 = get(eip1193State);
+    const connectingChain = get(connectingChainIdState);
+    const currentChain = get(currentChainState);
+    return eip1193 && connectingChain === currentChain.chainId
+      ? new ethers.providers.Web3Provider(eip1193)
+      : new ethers.providers.JsonRpcBatchProvider(currentChain.rpcUrls[0]);
   },
 });

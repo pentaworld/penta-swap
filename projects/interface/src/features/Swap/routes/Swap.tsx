@@ -1,18 +1,15 @@
 import { CurrencyInput } from "@/components/Currency";
-import { useWeb3 } from "@/hooks";
 import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
-import { fetchTokenPairs } from "../api/fetchPairs";
 import { useSelectCurrencies } from "../state";
-import { relationalPairsSelector } from "../state/trade/selector";
+import { tokenPairsQuery } from "../state/trade/selector";
 
 export const Swap = () => {
   const { inputCurrency, setInputCurrency, outputCurrency, setOutputCurrency } =
     useSelectCurrencies();
-  const pairs = useRecoilValue(relationalPairsSelector);
-  const { fetchProvider, currentChainName } = useWeb3();
+  const pairs = useRecoilValue(tokenPairsQuery);
   useEffect(() => {
-    fetchTokenPairs(pairs, currentChainName, fetchProvider).then(console.log);
+    console.log(pairs);
   }, [pairs]);
   return (
     <div className="flex flex-col gap-4 px-4">

@@ -1,9 +1,11 @@
 import { chainTokens } from "@/constant/tokens";
-import { currentChainNameSelector } from "@/states/web3";
+import { currentChainNameSelector, fetchProviderSelector } from "@/states/web3";
 import { isEqCurrencies } from "@/utils/isEqCurrencies";
 import { wrapCurrency } from "@/utils/wrapCurrency";
-import { Token } from "@penta-swap/sdk";
+import { Pair, Token } from "@penta-swap/sdk";
+import { BigNumber } from "ethers";
 import { selector } from "recoil";
+import { fetchTokenPairs } from "../../api/fetchPairs";
 import { inputCurrencyState, outputCurrencyState } from "../input/atoms";
 
 export const basePairsSelector = selector({
@@ -41,5 +43,16 @@ export const relationalPairsSelector = selector({
             .filter(([tokenA, tokenB]) => !isEqCurrencies(tokenA, tokenB))
         : [];
     return allTokenCombinations;
+  },
+});
+
+export const tokenPairsQuery = selector<[BigNumber, Pair[]]>({
+  key: "tokenPairsQuery",
+  get: async ({ get }) => {
+    const tokenPairs = get(relationalPairsSelector);
+    const chainName = get(currentChainNameSelector);
+    const provider = get(fetchProviderSelector);
+    const pairs = await fetchTokenPairs(tokenPairs, chainName, provider);
+    return pairs as [BigNumber, Pair[]];
   },
 });

@@ -44,6 +44,6 @@ export const fetchTokenPairs = async (
         );
       }
     })
-    .filter((pair) => Boolean(pair));
+    .filter((pair): pair is Pair => Boolean(pair));
   return [blockNumber, pairs];
 };
