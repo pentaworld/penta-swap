@@ -11,6 +11,11 @@ export const outputCurrencyState = atom<Currency | Token | null>({
   default: null,
 });
 
+export const nowTypingValueState = atom<"input" | "output">({
+  key: "nowTypingValueState",
+  default: "input",
+});
+
 export const inputValueState = atom<string>({
   key: "inputValueState",
   default: "",

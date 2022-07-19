@@ -1,4 +1,6 @@
+import { currentChainNameSelector } from "@/states/web3";
 import { isEqCurrencies } from "@/utils/isEqCurrencies";
+import { wrapCurrency } from "@/utils/wrapCurrency";
 import { DefaultValue, selector } from "recoil";
 import { inputCurrencyState, outputCurrencyState } from "./atoms";
 
@@ -33,5 +35,15 @@ export const outputCurrencySelector = selector({
     } else {
       set(outputCurrencyState, newCurrency);
     }
+  },
+});
+
+export const selectTokensSelector = selector({
+  key: "selectTokens",
+  get: ({ get }) => {
+    const chainName = get(currentChainNameSelector);
+    const inputToken = wrapCurrency(get(inputCurrencySelector), chainName);
+    const outputToken = wrapCurrency(get(outputCurrencySelector), chainName);
+    return { inputToken, outputToken };
   },
 });
